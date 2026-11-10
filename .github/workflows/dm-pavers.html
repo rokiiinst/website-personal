@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DM Pavers — Custom Driveways, Patios & Pool Decks in Fort Myers, FL</title>
+<meta name="description" content="DM Pavers has hand-set driveways, patios, and pool decks across Southwest Florida since 2013 — the same small crew, start to finish, built to outlast the people who built it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+
+  /* ---------- Tokens ---------- */
+  :root{
+    --ink:#15171a;
+    --ink-2:#1e2120;
+    --stone:#ece4d3;
+    --stone-2:#e1d6bf;
+    --clay:#ae5a32;
+    --clay-dark:#8a4525;
+    --teal:#213836;
+    --sand:#b8ac90;
+    --cream:#f5efe2;
+    --text-dark:#201d18;
+    --text-mute-dark:#6c6352;
+    --text-mute-light:#b7ac92;
+
+    --font-display:'Instrument Serif', serif;
+    --font-sans:'Archivo', sans-serif;
+
+    --fs-hero: clamp(3.1rem, 7.4vw, 7rem);
+    --fs-h2: clamp(2.1rem, 4.6vw, 3.6rem);
+    --fs-h3: clamp(1.4rem, 2.4vw, 1.9rem);
+    --fs-stat: clamp(3rem, 7vw, 5.5rem);
+    --fs-body: 1.05rem;
+
+    --container: 1360px;
+    --pad: clamp(1.5rem, 5vw, 5rem);
+
+    --ease: cubic-bezier(.16,.84,.44,1);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--stone);
+    color:var(--text-dark);
+    font-family:var(--font-sans);
+    font-size:var(--fs-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{ margin:0; font-weight:400; font-family:var(--font-display); letter-spacing:-0.01em; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; background:none; border:none; color:inherit; }
+  img,svg{ display:block; max-width:100%; }
+
+  .container{ max-width:var(--container); margin:0 auto; padding-inline:var(--pad); }
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--clay); color:var(--cream); padding:.8rem 1.4rem; z-index:999;
+    border-radius:4px;
+  }
+  .skip-link:focus{ left:1rem; top:1rem; }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--clay); outline-offset:3px; border-radius:2px;
+  }
+
+  /* ---------- Grain overlay ---------- */
+  .grain{
+    position:fixed; inset:0; z-index:500; pointer-events:none;
+    opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position:fixed; inset:0 0 auto 0; z-index:400;
+    padding:1.3rem 0;
+    transition:background .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  .site-header.is-scrolled{
+    background:rgba(21,23,26,.82); backdrop-filter:blur(10px);
+    padding:.9rem 0; border-color:rgba(245,239,226,.1);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between; gap:2rem;
+  }
+  .logo{
+    display:flex; align-items:center; gap:.65rem;
+    font-family:var(--font-display); font-size:1.4rem; color:var(--cream);
+  }
+  .logo-mark{
+    width:20px; height:20px; position:relative; flex:none;
+  }
+  .logo-mark::before,.logo-mark::after{
+    content:''; position:absolute; width:13px; height:7px; background:var(--clay); border-radius:1px;
+  }
+  .logo-mark::before{ top:1px; left:0; }
+  .logo-mark::after{ bottom:1px; right:0; background:var(--sand); }
+
+  .site-nav{ display:flex; gap:2.1rem; }
+  .site-nav a{
+    font-size:.92rem; color:var(--text-mute-light); position:relative; padding-bottom:3px;
+  }
+  .site-nav a::after{
+    content:''; position:absolute; left:50%; right:50%; bottom:0; height:1px; background:var(--cream);
+    transition:left .3s var(--ease), right .3s var(--ease);
+  }
+  .site-nav a:hover{ color:var(--cream); }
+  .site-nav a:hover::after{ left:0; right:0; }
+
+  .header-actions{ display:flex; align-items:center; gap:1.4rem; }
+  .phone-link{
+    font-size:.92rem; color:var(--cream); font-weight:600; white-space:nowrap;
+    border-bottom:1px solid rgba(245,239,226,.35);
+  }
+  .nav-toggle{ display:none; flex-direction:column; gap:5px; padding:.4rem; }
+  .nav-toggle span{ width:22px; height:2px; background:var(--cream); }
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.95rem 1.8rem; border-radius:3px; font-size:.95rem; font-weight:600;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease);
+  }
+  .btn-primary{
+    background:var(--clay); color:var(--cream);
+    box-shadow:0 10px 24px -8px rgba(174,90,50,.55);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 30px -8px rgba(174,90,50,.65); background:var(--clay-dark); }
+  .btn-ghost{
+    color:var(--cream); border:1px solid rgba(245,239,226,.3); background:transparent;
+  }
+  .btn-ghost:hover{ border-color:var(--cream); transform:translateY(-2px); }
+  .btn-dark{ background:var(--ink); color:var(--cream); }
+  .btn-dark:hover{ transform:translateY(-2px); background:var(--ink-2); }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:var(--ink); color:var(--cream);
+    min-height:100vh; display:flex; align-items:center;
+    padding-top:8rem; padding-bottom:6rem;
+  }
+  .hero::before{
+    content:''; position:absolute; top:-20%; left:-10%; width:55%; height:70%;
+    background:radial-gradient(circle, rgba(174,90,50,.22), transparent 65%);
+    filter:blur(10px); pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:2; width:100%;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:2rem; align-items:center;
+  }
+  .hero-copy{ max-width:40rem; }
+  .hero h1{
+    font-size:var(--fs-hero); line-height:.98; color:var(--cream);
+  }
+  .hero-sub{
+    margin-top:2rem; max-width:34rem; font-size:1.15rem; line-height:1.65; color:var(--text-mute-light);
+  }
+  .hero-ctas{ margin-top:2.6rem; display:flex; flex-wrap:wrap; gap:1rem; }
+  .hero-meta{
+    margin-top:3.2rem; font-size:.88rem; color:var(--text-mute-light);
+    padding-top:1.4rem; border-top:1px solid rgba(245,239,226,.14); max-width:28rem;
+  }
+
+  .hero-ground-wrap{
+    position:relative; height:clamp(320px, 42vw, 560px);
+  }
+  .hero-ground{
+    position:absolute; right:-8%; bottom:-6%; width:118%;
+    transform:perspective(1000px) rotateX(56deg) rotateZ(-10deg);
+    transform-origin:bottom right;
+    mask-image:linear-gradient(to top, black 45%, transparent 92%);
+    -webkit-mask-image:linear-gradient(to top, black 45%, transparent 92%);
+  }
+  .paver-grid{
+    display:grid; grid-template-columns:repeat(9, 1fr); gap:7px;
+  }
+  .paver{
+    aspect-ratio:1.5; border-radius:2px;
+    box-shadow:0 7px 16px -4px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+    opacity:0; transform:translateY(22px);
+    animation:paverRise .7s var(--ease) forwards;
+    animation-delay:calc(var(--i) * 35ms);
+  }
+  @keyframes paverRise{ to{ opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion: reduce){
+    .paver{ opacity:1; transform:none; animation:none; }
+  }
+
+  /* ---------- Section rhythm ---------- */
+  .section{ padding-block:clamp(5rem, 11vw, 9rem); }
+  .section-dark{ background:var(--ink); color:var(--cream); }
+  .eyebrow-rule{ width:46px; height:3px; background:var(--clay); border-radius:2px; margin-bottom:1.6rem; }
+  .section-head{ max-width:44rem; }
+  .section-head h2{ font-size:var(--fs-h2); line-height:1.04; }
+  .section-head p{ margin-top:1.3rem; max-width:38rem; font-size:1.05rem; color:var(--text-mute-dark); line-height:1.6; }
+  .section-dark .section-head p{ color:var(--text-mute-light); }
+
+  /* ---------- Problem / Solution ---------- */
+  .approach{ background:var(--ink); color:var(--cream); padding-block:0; }
+  .approach-grid{ display:grid; grid-template-columns:1fr 1fr; min-height:720px; }
+  .approach-panel{ padding:clamp(3rem,6vw,5.5rem) clamp(2rem,5vw,4rem); display:flex; flex-direction:column; justify-content:center; }
+  .approach-problem{ background:var(--ink-2); border-right:1px solid var(--clay); position:relative; }
+  .approach-solution{ background:var(--stone); color:var(--text-dark); }
+  .approach-tag{ font-size:.85rem; color:var(--text-mute-light); margin-bottom:1.1rem; }
+  .approach-solution .approach-tag{ color:var(--clay); font-weight:600; }
+  .approach-panel h3{ font-size:var(--fs-h3); line-height:1.15; max-width:16ch; }
+  .approach-panel p{ margin-top:1.3rem; max-width:34ch; line-height:1.6; color:var(--text-mute-light); }
+  .approach-solution p{ color:var(--text-mute-dark); }
+  .approach-list{ margin-top:1.8rem; display:flex; flex-direction:column; gap:.85rem; }
+  .approach-list li{ list-style:none; display:flex; gap:.8rem; align-items:baseline; font-size:.96rem; }
+  .approach-list li::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--clay); flex:none; transform:translateY(-1px); }
+  .approach-solution .approach-list li::before{ background:var(--teal); }
+
+  /* ---------- Feature showcase (staggered coursing) ---------- */
+  .course-grid{
+    margin-top:3.5rem;
+    display:grid; grid-template-columns:repeat(12, 1fr); gap:1.1rem;
+  }
+  .course-block{
+    background:var(--cream); border:1px solid var(--stone-2);
+    padding:2.1rem 2rem; border-radius:3px;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+  }
+  .course-block:hover{
+    transform:translateY(-6px); border-color:var(--clay);
+    box-shadow:0 20px 34px -16px rgba(32,29,24,.28);
+  }
+  .course-block h3{ font-size:1.35rem; }
+  .course-block p{ margin-top:.8rem; color:var(--text-mute-dark); line-height:1.55; max-width:30ch; }
+  .course-block .num{ font-family:var(--font-display); font-size:1rem; color:var(--sand); margin-bottom:.6rem; display:block; }
+
+  .c1{ grid-column:1 / 8; }
+  .c2{ grid-column:8 / 13; margin-top:2.6rem; }
+  .c3{ grid-column:1 / 6; margin-top:1.2rem; }
+  .c4{ grid-column:6 / 13; }
+  .c5{ grid-column:1 / 9; margin-top:2.2rem; }
+  .c6{ grid-column:9 / 13; margin-top:.4rem; }
+
+  /* ---------- Results ---------- */
+  .stat-row{
+    margin-top:3.4rem; display:grid; grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid rgba(245,239,226,.14);
+  }
+  .stat{ padding:2.2rem 1.4rem 0 0; border-right:1px solid rgba(245,239,226,.14); }
+  .stat:last-child{ border-right:none; }
+  .stat .n{ font-family:var(--font-display); font-size:var(--fs-stat); line-height:1; color:var(--cream); }
+  .stat .l{ margin-top:.7rem; font-size:.9rem; color:var(--text-mute-light); max-width:16ch; }
+
+  .quote-row{
+    margin-top:4.5rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem;
+  }
+  .quote blockquote{ font-family:var(--font-display); font-style:italic; font-size:1.5rem; line-height:1.4; color:var(--cream); }
+  .quote cite{ display:block; margin-top:1.1rem; font-style:normal; font-size:.88rem; color:var(--text-mute-light); }
+
+  /* ---------- Process ---------- */
+  .process-list{ margin-top:3.5rem; border-top:1px solid var(--stone-2); }
+  .process-step{ border-bottom:1px solid var(--stone-2); }
+  .process-trigger{
+    width:100%; display:grid; grid-template-columns:3.5rem 1fr auto; align-items:center;
+    gap:1.4rem; padding:1.9rem 0; text-align:left;
+  }
+  .process-trigger .pn{ font-family:var(--font-display); font-size:1.7rem; color:var(--sand); }
+  .process-trigger .pt{ font-size:1.25rem; font-family:var(--font-display); }
+  .process-trigger .ps{ display:block; margin-top:.3rem; font-size:.92rem; color:var(--text-mute-dark); font-family:var(--font-sans); }
+  .process-trigger .pp{
+    width:30px; height:30px; border:1px solid var(--text-mute-dark); border-radius:50%;
+    position:relative; flex:none;
+  }
+  .process-trigger .pp::before,.process-trigger .pp::after{
+    content:''; position:absolute; background:var(--text-dark); top:50%; left:50%;
+  }
+  .process-trigger .pp::before{ width:10px; height:1px; transform:translate(-50%,-50%); }
+  .process-trigger .pp::after{ width:1px; height:10px; transform:translate(-50%,-50%); transition:transform .3s var(--ease); }
+  .process-step.is-open .pp::after{ transform:translate(-50%,-50%) rotate(90deg) scaleY(0); }
+
+  .process-panel{
+    max-height:0; overflow:hidden; transition:max-height .45s var(--ease);
+  }
+  .process-panel-inner{ padding:0 0 2.2rem 5.9rem; max-width:40ch; color:var(--text-mute-dark); line-height:1.6; }
+  .process-step.is-open .process-panel{ max-height:220px; }
+
+  /* ---------- Pricing ---------- */
+  .price-list{ margin-top:3.5rem; }
+  .price-row{
+    display:grid; grid-template-columns:1.4fr .9fr auto; align-items:baseline;
+    gap:1.5rem; padding:1.6rem 0; border-bottom:1px solid var(--stone-2);
+  }
+  .price-row:first-child{ border-top:1px solid var(--stone-2); }
+  .price-row .pname{ font-family:var(--font-display); font-size:1.4rem; }
+  .price-row .pref{ font-size:.9rem; color:var(--text-mute-dark); }
+  .price-row .pfrom{ font-size:.85rem; color:var(--text-mute-dark); display:block; }
+  .price-row .pval{ font-family:var(--font-display); font-size:1.5rem; color:var(--clay); }
+
+  .price-callout{
+    margin-top:3rem; background:var(--ink); color:var(--cream);
+    padding:2.4rem clamp(1.6rem,4vw,3rem); border-radius:4px;
+    display:flex; flex-wrap:wrap; gap:1.6rem; align-items:center; justify-content:space-between;
+  }
+  .price-callout p{ max-width:34ch; font-size:1.05rem; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{ background:var(--ink); color:var(--cream); position:relative; overflow:hidden; }
+  .final-cta-inner{ display:grid; grid-template-columns:1.2fr .8fr; gap:3rem; align-items:end; }
+  .final-cta h2{ font-size:clamp(2.6rem, 6.4vw, 5.2rem); line-height:1; }
+  .final-cta-sub{ margin-top:1.6rem; max-width:32ch; color:var(--text-mute-light); font-size:1.08rem; line-height:1.6; }
+  .final-cta-ctas{ margin-top:2.4rem; display:flex; gap:1rem; flex-wrap:wrap; }
+  .contact-block{ justify-self:end; text-align:right; }
+  .contact-block .cl{ font-size:.85rem; color:var(--text-mute-light); margin-bottom:.4rem; }
+  .contact-block .cv{ font-family:var(--font-display); font-size:1.7rem; }
+  .contact-block .cv + .cl{ margin-top:1.6rem; }
+
+  .mini-strip{ margin-top:5rem; display:grid; grid-template-columns:repeat(18,1fr); gap:5px; opacity:.85; }
+  .mini-strip span{ aspect-ratio:2.2; border-radius:1px; background:var(--clay); opacity:.6; }
+  .mini-strip span:nth-child(3n){ background:var(--sand); opacity:.4; }
+  .mini-strip span:nth-child(5n){ background:var(--teal); opacity:.55; }
+
+  /* ---------- Footer ---------- */
+  .site-footer{ background:var(--ink-2); color:var(--text-mute-light); padding-block:3.2rem; }
+  .footer-inner{ display:flex; flex-wrap:wrap; gap:1.6rem; align-items:center; justify-content:space-between; font-size:.88rem; }
+  .footer-inner a{ color:var(--cream); }
+  .footer-nav{ display:flex; gap:1.6rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 920px){
+    .site-nav{ position:fixed; inset:0 0 0 auto; width:min(78vw,320px); height:100vh;
+      background:var(--ink); flex-direction:column; padding:7rem 2rem 2rem; gap:1.6rem;
+      transform:translateX(100%); transition:transform .4s var(--ease); z-index:300; }
+    .site-nav.is-open{ transform:translateX(0); }
+    .nav-toggle{ display:flex; }
+
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-ground-wrap{ height:260px; margin-top:2rem; }
+    .hero-ground{ width:150%; right:-20%; }
+
+    .approach-grid{ grid-template-columns:1fr; min-height:0; }
+    .approach-problem{ border-right:none; border-bottom:1px solid var(--clay); }
+
+    .course-grid{ grid-template-columns:1fr; }
+    .c1,.c2,.c3,.c4,.c5,.c6{ grid-column:1/-1; margin-top:0; }
+
+    .stat-row{ grid-template-columns:1fr 1fr; }
+    .stat:nth-child(2){ border-right:none; }
+    .stat{ padding-top:1.8rem; }
+
+    .quote-row{ grid-template-columns:1fr; gap:2.2rem; }
+
+    .price-row{ grid-template-columns:1fr; gap:.3rem; }
+    .price-row .pval{ order:-1; }
+
+    .final-cta-inner{ grid-template-columns:1fr; }
+    .contact-block{ justify-self:start; text-align:left; margin-top:2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="logo" href="#top"><span class="logo-mark" aria-hidden="true"></span>DM Pavers</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="phone-link" href="tel:12394402373">(239) 440-2373</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1>The ground remembers who laid it.</h1>
+        <p class="hero-sub">DM Pavers has shaped driveways, patios, and pool decks across Southwest Florida since 2013 — every stone set by hand, by the same crew, to outlast the people who built it.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#contact">Start your project</a>
+          <a class="btn btn-ghost" href="#process">See the process</a>
+        </div>
+        <p class="hero-meta">Based in Fort Myers, family-run since 2013. Serving Lee County, including Cape Coral, Bonita Springs, Estero, and Sanibel.</p>
+      </div>
+      <div class="hero-ground-wrap">
+        <div class="hero-ground">
+          <div class="paver-grid" id="paverGrid" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="approach" id="approach">
+    <div class="approach-grid">
+      <div class="approach-panel approach-problem">
+        <span class="approach-tag">Most paver jobs fail the same way</span>
+        <h3>A crew you've never met, gone before the base has even cured.</h3>
+        <p>A different subcontractor shows up each phase. Base prep gets rushed to hit a bid. Within a season the joints are weeds and the edges have started to shift.</p>
+        <ul class="approach-list">
+          <li>Subcontracted labor you never actually meet</li>
+          <li>Base compaction skipped, or barely done</li>
+          <li>Settling, shifting, and weeds within a year</li>
+        </ul>
+      </div>
+      <div class="approach-panel approach-solution">
+        <span class="approach-tag">What we build instead</span>
+        <h3>The same four people, start to finish, on every job.</h3>
+        <p>The crew that measures your yard is the crew compacting your base and setting your last paver. We over-engineer what you'll never see, so what you do see stays flat for decades.</p>
+        <ul class="approach-list">
+          <li>One four-person crew, no rotating subs</li>
+          <li>8 inches of compacted base, engineered for Florida's water table</li>
+          <li>Polymeric joint sand and a written workmanship warranty</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-rule"></div>
+        <h2>Work, by surface.</h2>
+        <p>Six kinds of ground, one standard of base work underneath every one of them.</p>
+      </div>
+      <div class="course-grid">
+        <div class="course-block c1">
+          <h3>Driveways</h3>
+          <p>A first impression that doesn't crack, heave, or fade under a Florida summer.</p>
+        </div>
+        <div class="course-block c2">
+          <h3>Patios &amp; pool decks</h3>
+          <p>Cool-touch, slip-resistant surfaces built to live in bare feet and a swimsuit.</p>
+        </div>
+        <div class="course-block c3">
+          <h3>Walkways &amp; entryways</h3>
+          <p>The path from driveway to door, laid with the same intention as the house.</p>
+        </div>
+        <div class="course-block c4">
+          <h3>Outdoor kitchens &amp; fire features</h3>
+          <p>Counters, grills, and fire bowls set permanently into the hardscape around them.</p>
+        </div>
+        <div class="course-block c5">
+          <h3>Retaining walls &amp; drainage</h3>
+          <p>Engineered structure for sloped lots, standing water, and sinking corners.</p>
+        </div>
+        <div class="course-block c6">
+          <h3>Commercial hardscape</h3>
+          <p>Parking areas and plazas built for daily traffic, not just a grand opening.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section section-dark" id="results">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-rule"></div>
+        <h2>Thirteen years of Southwest Florida driveways.</h2>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="n">13</span><span class="l">Years in business, since 2013</span></div>
+        <div class="stat"><span class="n">150+</span><span class="l">Installations completed</span></div>
+        <div class="stat"><span class="n">4</span><span class="l">Person crew, every job</span></div>
+        <div class="stat"><span class="n">5</span><span class="l">Counties served across SWFL</span></div>
+      </div>
+      <div class="quote-row">
+        <div class="quote">
+          <blockquote>“They were back out two days after a storm to check the drainage — we hadn't even called.”</blockquote>
+          <cite>Linda R., Cape Coral</cite>
+        </div>
+        <div class="quote">
+          <blockquote>“Four years in, the driveway still looks like the day they left.”</blockquote>
+          <cite>Mark T., Fort Myers</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-rule"></div>
+        <h2>How a project actually happens.</h2>
+        <p>Five stages, the same crew the whole way through. Tap a step for the detail.</p>
+      </div>
+      <div class="process-list" id="processList">
+
+        <div class="process-step is-open">
+          <button class="process-trigger">
+            <span class="pn">01</span>
+            <span><span class="pt">Site walk &amp; design</span><span class="ps">We measure, assess drainage, and talk through materials — in your yard, not over the phone.</span></span>
+            <span class="pp" aria-hidden="true"></span>
+          </button>
+          <div class="process-panel"><div class="process-panel-inner">Usually 45–60 minutes. We leave you with a rough layout and a sense of what's possible before any paperwork.</div></div>
+        </div>
+
+        <div class="process-step">
+          <button class="process-trigger">
+            <span class="pn">02</span>
+            <span><span class="pt">Fixed quote</span><span class="ps">An itemized number for materials and labor — no change orders without your sign-off.</span></span>
+            <span class="pp" aria-hidden="true"></span>
+          </button>
+          <div class="process-panel"><div class="process-panel-inner">You'll see paver cost, base material, labor, and drainage work broken out separately, not bundled into one round number.</div></div>
+        </div>
+
+        <div class="process-step">
+          <button class="process-trigger">
+            <span class="pn">03</span>
+            <span><span class="pt">Excavation &amp; base</span><span class="ps">Removal, grading, and 8 inches of compacted aggregate base, engineered for your soil.</span></span>
+            <span class="pp" aria-hidden="true"></span>
+          </button>
+          <div class="process-panel"><div class="process-panel-inner">This is the stage nobody sees and the one that decides whether your pavers are flat in ten years. We don't shortcut it.</div></div>
+        </div>
+
+        <div class="process-step">
+          <button class="process-trigger">
+            <span class="pn">04</span>
+            <span><span class="pt">Paver installation</span><span class="ps">Hand-set course by course, every edge cut to fit, joints locked with polymeric sand.</span></span>
+            <span class="pp" aria-hidden="true"></span>
+          </button>
+          <div class="process-panel"><div class="process-panel-inner">Compacted twice — once mid-install, once at the end — so the surface settles before you ever walk on it.</div></div>
+        </div>
+
+        <div class="process-step">
+          <button class="process-trigger">
+            <span class="pn">05</span>
+            <span><span class="pt">Walkthrough &amp; warranty</span><span class="ps">A final inspection together, and a written workmanship warranty handed over in person.</span></span>
+            <span class="pp" aria-hidden="true"></span>
+          </button>
+          <div class="process-panel"><div class="process-panel-inner">We point out drainage lines and care notes directly — not in a PDF you'll lose track of.</div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow-rule"></div>
+        <h2>What it typically runs.</h2>
+        <p>Every project is priced on-site. These are starting ranges to plan around, not a quote.</p>
+      </div>
+      <div class="price-list">
+        <div class="price-row">
+          <div><span class="pname">Paver driveway</span><span class="pfrom">Avg. 600–900 sq ft</span></div>
+          <div class="pref">Concrete or permeable paver</div>
+          <div class="pval">from $9,800</div>
+        </div>
+        <div class="price-row">
+          <div><span class="pname">Patio or pool deck</span><span class="pfrom">Avg. 400–700 sq ft</span></div>
+          <div class="pref">Cool-touch options available</div>
+          <div class="pval">from $7,200</div>
+        </div>
+        <div class="price-row">
+          <div><span class="pname">Walkway or entry</span><span class="pfrom">Avg. 100–250 sq ft</span></div>
+          <div class="pref">Matched to existing hardscape</div>
+          <div class="pval">from $2,400</div>
+        </div>
+        <div class="price-row">
+          <div><span class="pname">Retaining wall</span><span class="pfrom">Per linear foot</span></div>
+          <div class="pref">Engineered for slope &amp; drainage</div>
+          <div class="pval">from $55/ft</div>
+        </div>
+      </div>
+      <div class="price-callout">
+        <p>Every quote starts with a free, on-site estimate — walked in person, not emailed from a spreadsheet.</p>
+        <a class="btn btn-primary" href="#contact">Schedule your estimate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section final-cta" id="contact">
+    <div class="container">
+      <div class="final-cta-inner">
+        <div>
+          <h2>Let's set the first stone.</h2>
+          <p class="final-cta-sub">Tell us about your yard and we'll walk it with you in person — usually within a week.</p>
+          <div class="final-cta-ctas">
+            <a class="btn btn-primary" href="tel:12394402373">Call (239) 440-2373</a>
+            <a class="btn btn-ghost" href="mailto:info@dmpavers.com">Email us instead</a>
+          </div>
+        </div>
+        <div class="contact-block">
+          <span class="cl">Phone</span>
+          <span class="cv">(239) 440-2373</span>
+          <span class="cl">Address</span>
+          <span class="cv" style="font-size:1.2rem; line-height:1.4;">16040 Waterleaf Ln<br>Fort Myers, FL 33908</span>
+        </div>
+      </div>
+      <div class="mini-strip" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© <span id="yr">2026</span> DM Pavers LLC — Fort Myers, FL</span>
+    <nav class="footer-nav">
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="tel:12394402373">(239) 440-2373</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Header scroll state
+  var header = document.getElementById('siteHeader');
+  var onScroll = function(){
+    if(window.scrollY > 40){ header.classList.add('is-scrolled'); }
+    else{ header.classList.remove('is-scrolled'); }
+  };
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Hero paver grid — generated, staggered reveal
+  var grid = document.getElementById('paverGrid');
+  var tones = ['#ae5a32', '#8a4525', '#b8ac90', '#213836', '#c2693e'];
+  var ROWS = 6, COLS = 9;
+  for (var r = 0; r < ROWS; r++){
+    for (var c = 0; c < COLS; c++){
+      var i = r * COLS + c;
+      var el = document.createElement('div');
+      el.className = 'paver';
+      el.style.setProperty('--i', i);
+      el.style.background = tones[(r + c) % tones.length];
+      if ((r + c) % 7 === 0){ el.style.gridColumn = 'span 2'; }
+      grid.appendChild(el);
+    }
+  }
+
+  // Process accordion
+  document.querySelectorAll('.process-trigger').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.closest('.process-step').classList.toggle('is-open');
+    });
+  });
+</script>
+
+</body>
+</html>
